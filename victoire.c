@@ -5,7 +5,7 @@ void victoir(Sokoban *jeu) // Gère la victoire
 {
     
     jeu->fin = 1; // Marque la fin de la partie
-    affichagee(jeu);
+    affiche(jeu);
     
     printf("Vous avez gagner !\n"); // message de victoire
 

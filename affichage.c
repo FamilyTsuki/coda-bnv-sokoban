@@ -1,7 +1,16 @@
-
 #include <stdio.h>
 #include "sokoban.h"
 // 0 case vide 1 caisse 2 objectif 3 joueur 4 mur
+void accueil(void) // Affiche l'écran d'accueil
+{
+    printf("\n==============================\n");
+    printf("      Bienvenue dans Sokoban !\n");
+    printf("==============================\n");
+    printf("Utilisez z (haut), s (bas), q (gauche), d (droite) pour déplacer le joueur.\n");
+    printf("Appuyez sur Entrée pour commencer...\n");
+    getchar();
+}
+
 void affiche(Sokoban *jeu) // fonction qui affiche la map
 {
     for (int i = 0; i < TAILLE_GRILLE; i++) 

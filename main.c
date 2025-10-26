@@ -8,8 +8,10 @@ int main() // Fonction principale du Sokoban
     Sokoban *jeu = malloc(sizeof(*jeu)); // Allocation de la structure de jeu
     char choi; // variable pour stocker le choix du joueur
     char result; // variable pour stocker le résultat de scanf utiliser pour verifier les entrées utilisateur
-    
+
+    accueil(); // Affiche l'écran d'accueil
     initialiser_jeu(jeu); // Initialise le jeu
+    system("clear"); // Nettoie le terminal (Linux/macOS)
     affiche(jeu); // Affiche l'état initial de la grille
     while (jeu->fin != 1) // boucle principale du jeu
     {
@@ -40,11 +42,10 @@ int main() // Fonction principale du Sokoban
             {
                 break;
             }
-            affiche(jeu); // Affiche l'état actuel de la grille
-            
+            system("clear"); // Nettoie le terminal à chaque tour
+            affiche(jeu); // Affiche la grille après le déplacement
         }
     }
-    
     liberer_jeu(jeu); // Libère la mémoire allouée pour le jeu
     free(jeu); // Libère la structure de jeu
     exit(0); 

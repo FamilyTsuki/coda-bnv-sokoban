@@ -24,4 +24,6 @@ int verifier_defaite(Sokoban *jeu);   // Vérifie si une caisse est bloquée
 void defaite(Sokoban *jeu);           // Gère la défaite (sauvegarde et message)
 void victoir(Sokoban *jeu);           // Gère la victoire (sauvegarde et message)
 
+void accueil(); // Affiche l'écran d'accueil
+
 #endif 

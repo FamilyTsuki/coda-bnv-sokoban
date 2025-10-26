@@ -1,3 +1,5 @@
+#include "sokoban.h"
+#include <stdlib.h>
 void liberer_jeu(Sokoban *jeu) // Libere la mémoire allouée pour le jeu
 {
     for (int i = 0; i < TAILLE_GRILLE; i++) 

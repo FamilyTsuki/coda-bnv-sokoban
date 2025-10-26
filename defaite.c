@@ -6,7 +6,7 @@ void defaite(Sokoban *jeu) // Gère la défaite
     
     jeu->fin = 1;// Marque la fin de la partie
 
-    affichage(jeu);
+    affiche(jeu);
     printf("Vous avez perdu !\n"); // Message pour le joueur
 
     
