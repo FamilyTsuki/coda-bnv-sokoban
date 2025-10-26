@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "sokoban.h"
 
-void victoir(Sokoban *jeu) // Gère la victoire
+void victoire(Sokoban *jeu) // Gère la victoire
 {
     
     jeu->fin = 1; // Marque la fin de la partie

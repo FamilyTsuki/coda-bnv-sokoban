@@ -7,7 +7,8 @@ void accueil(void) // Affiche l'écran d'accueil
     printf("      Bienvenue dans Sokoban !\n");
     printf("==============================\n");
     printf("objectif : pousser la caisse (X) sur l'objectif (.)\n");
-    printf("Utilisez z (haut), s (bas), q (gauche), d (droite) pour déplacer le joueur.\n");
+    printf("un readme est disponible pour plus d'informations.\n");
+    printf("\nUtilisez z (haut), s (bas), q (gauche), d (droite) pour déplacer le joueur.\n");
     printf("Appuyez sur Entrée pour commencer...\n");
     getchar(); // Attend que l'utilisateur appuie sur Entrée (trouver sur redit)
 }

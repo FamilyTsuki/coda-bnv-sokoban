@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "sokoban.h"
 
-void deplassment(Sokoban *jeu, char choi) // Gère le déplacement du joueur
+void deplacement(Sokoban *jeu, char choi) // Gère le déplacement du joueur
 {
     if (choi == 'z') // le joueur veut aller en haut
     {
@@ -93,7 +93,7 @@ void deplassment(Sokoban *jeu, char choi) // Gère le déplacement du joueur
     }
     if(jeu->grille[jeu->pos_victoire_x][jeu->pos_victoire_y] == 1) // Vérifie la condition de victoire
         {
-            victoir(jeu); // Gère la victoire
+            victoire(jeu); // Gère la victoire
         }
 
 }

@@ -4,12 +4,29 @@
 #include <string.h>
 #include <time.h>
 
-int main() // Fonction principale du Sokoban
+int main() 
 {
-    srand(time(NULL)); // Initialisation de l'aléatoire
-    Sokoban *jeu = malloc(sizeof(*jeu)); // Allocation de la structure de jeu
-    char choi; // variable pour stocker le choix du joueur
-    char result; // variable pour stocker le résultat de scanf utiliser pour verifier les entrées utilisateur
+    /* Initialisation du générateur de nombres aléatoires pour les positions initiales
+     * Utilise l'heure actuelle comme graine pour avoir des positions différentes
+     * à chaque lancement du jeu
+     */
+    srand(time(NULL));
+
+    /* Allocation dynamique de la structure principale du jeu
+     * Cette structure contient :
+     * - La grille de jeu
+     * - Les positions du joueur (pos_x, pos_y)
+     * - La position de l'objectif (pos_victoire_x, pos_victoire_y)
+     * - L'état de fin de partie (fin)
+     */
+    Sokoban *jeu = malloc(sizeof(*jeu));
+
+    /* Variables de contrôle pour la saisie utilisateur
+     * choi : stocke le caractère de déplacement (z,q,s,d)
+     * result : utilisée pour vérifier si la saisie est valide
+     */
+    char choi;
+    char result;
 
     accueil(); // Affiche l'écran d'accueil
     initialiser_jeu(jeu); // Initialise le jeu
@@ -27,7 +44,7 @@ int main() // Fonction principale du Sokoban
         }
         else // Si l'entrée est valide
         {
-            deplassment(jeu, choi); // Effectue le déplacement
+            deplacement(jeu, choi); // Effectue le déplacement
             
             for(int i = 0; i < 10; i++) 
             {
