@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include "sokoban.h"
 #include <string.h>
+#include <time.h>
 
 int main() // Fonction principale du Sokoban
 {
+    srand(time(NULL)); // Initialisation de l'aléatoire
     Sokoban *jeu = malloc(sizeof(*jeu)); // Allocation de la structure de jeu
     char choi; // variable pour stocker le choix du joueur
     char result; // variable pour stocker le résultat de scanf utiliser pour verifier les entrées utilisateur

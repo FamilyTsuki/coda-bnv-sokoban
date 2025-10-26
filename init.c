@@ -10,46 +10,78 @@ void initialiser_jeu(Sokoban *jeu) // Initialise les variables du jeu et la gril
     {
         jeu->grille[i] = (int*)malloc(TAILLE_GRILLE * sizeof(int)); // Allocation de chaque ligne
     }
-    
-  
-    int initial[TAILLE_GRILLE][TAILLE_GRILLE] = {  // Initialisation de la grille
-        {4,4,4,4,4,4,4,4,4,4},
-        {4,0,0,0,0,0,0,0,0,4},
-        {4,0,0,0,0,0,0,0,0,4},
-        {4,0,0,0,0,0,0,0,0,4},
-        {4,0,0,0,0,0,0,0,0,4},
-        {4,0,0,1,0,0,0,0,0,4},
-        {4,0,0,0,0,0,0,0,0,4},
-        {4,0,0,0,0,0,0,0,0,4},
-        {4,0,0,0,0,0,0,2,0,4},
-        {4,4,4,4,4,4,4,4,4,4}
-    };
-    
-    for (int i = 0; i < TAILLE_GRILLE; i++) 
-    {
-        for (int j = 0; j < TAILLE_GRILLE; j++) 
-        {
-            jeu->grille[i][j] = initial[i][j]; // Copie de la grille initiale pour que chaque partie commence de la même façon
+
+    // Initialisation de la grille vide avec murs
+    for (int i = 0; i < TAILLE_GRILLE; i++) {
+        for (int j = 0; j < TAILLE_GRILLE; j++) {
+            if (i == 0 || i == TAILLE_GRILLE-1 || j == 0 || j == TAILLE_GRILLE-1)
+                jeu->grille[i][j] = 4; // mur
+            else
+                jeu->grille[i][j] = 0; // vide
         }
     }
-    
- // Initialisation des autres variables
-    jeu->pos_x = 3; // position initiale du joueur en x
-    jeu->pos_y = 3; // position initiale du joueur en y
-    for (int i = 0; i < TAILLE_GRILLE; i++) 
+
+    // Génération des positions aléatoires différentes et valides
+    int caisse_x; 
+    int caisse_y; 
+    int joueur_x; 
+    int joueur_y; 
+    int objectif_x; 
+    int objectif_y;
+    int position_valide;
+    while (1 == 1) // boucle jusqu'à obtenir des positions valides
     {
-        for (int j = 0; j < TAILLE_GRILLE; j++) 
-        {
-            if (jeu->grille[i][j] == 2)  // Trouve la position de l'objectif
+        caisse_x = rand() % (TAILLE_GRILLE-2) + 1; // Position aléatoire entre 1 et TAILLE_GRILLE-2
+        caisse_y = rand() % (TAILLE_GRILLE-2) + 1;
+        joueur_x = rand() % (TAILLE_GRILLE-2) + 1;
+        joueur_y = rand() % (TAILLE_GRILLE-2) + 1;
+        objectif_x = rand() % (TAILLE_GRILLE-2) + 1;
+        objectif_y = rand() % (TAILLE_GRILLE-2) + 1;
+        position_valide = 1; // suppose que la position est valide
+        if ((caisse_x == joueur_x && caisse_y == joueur_y) || // vérifie que les positions sont différentes
+            (caisse_x == objectif_x && caisse_y == objectif_y) ||
+            (joueur_x == objectif_x && joueur_y == objectif_y)) 
             {
-                jeu->pos_victoire_x = i; // position x de l'objectif
-                jeu->pos_victoire_y = j; // position y de l'objectif
+                position_valide = 0; // positions non valides
             }
+        if ((jeu->grille[caisse_x-1][caisse_y] == 4 && jeu->grille[caisse_x][caisse_y-1] == 4) || // verifie que la caisse n'est pas bloquée dans un coin
+            (jeu->grille[caisse_x-1][caisse_y] == 4 && jeu->grille[caisse_x][caisse_y+1] == 4) ||
+            (jeu->grille[caisse_x+1][caisse_y] == 4 && jeu->grille[caisse_x][caisse_y-1] == 4) ||
+            (jeu->grille[caisse_x+1][caisse_y] == 4 && jeu->grille[caisse_x][caisse_y+1] == 4)) 
+            {
+                position_valide = 0;
+            }
+        if (caisse_x == 1 || caisse_x == TAILLE_GRILLE-2 || caisse_y == 1 || caisse_y == TAILLE_GRILLE-2) // évite de placer la caisse sur les bords
+        {
+            position_valide = 0;
+        }
+        if (position_valide == 1) // si les positions sont valides, on sort de la boucle
+        {
+            break; // sort de la boucle
         }
     }
-    
-    jeu->fin = 0; // fin de partie initialisée à 0 pour indiquer que la partie est en cours si la variable vaux 1 la partie est terminé
-    
-    jeu->grille[jeu->pos_x][jeu->pos_y] = 3; // place le joueur sur la grille
+
+    // Placement des éléments
+    jeu->grille[caisse_x][caisse_y] = 1; // caisse
+    jeu->grille[joueur_x][joueur_y] = 3; // joueur
+    jeu->grille[objectif_x][objectif_y] = 2; // objectif
+
+    jeu->pos_x = joueur_x;
+    jeu->pos_y = joueur_y;
+    jeu->pos_victoire_x = objectif_x;
+    jeu->pos_victoire_y = objectif_y;
+    jeu->fin = 0;
 }
+
+void liberer_jeu(Sokoban *jeu) 
+{
+    for (int i = 0; i < TAILLE_GRILLE; i++) 
+    {
+        free(jeu->grille[i]);
+    }
+    free(jeu->grille);
+}
+
+
+
 
