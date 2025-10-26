@@ -73,14 +73,6 @@ void initialiser_jeu(Sokoban *jeu) // Initialise les variables du jeu et la gril
     jeu->fin = 0;
 }
 
-void liberer_jeu(Sokoban *jeu) 
-{
-    for (int i = 0; i < TAILLE_GRILLE; i++) 
-    {
-        free(jeu->grille[i]);
-    }
-    free(jeu->grille);
-}
 
 
 
